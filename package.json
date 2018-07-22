@@ -1,0 +1,77 @@
+{
+  "name": "extract-plugin",
+  "version": "0.1.0",
+  "description": "Extract any files from webpack build.",
+  "license": "MIT",
+  "author": "Matthias Giger",
+  "contributors": [
+    {
+      "name": "Tobias Koppers @sokra (mini-css-extract-plugin)"
+    }
+  ],
+  "main": "dist/cjs.js",
+  "scripts": {
+    "start": "npm run build -- -w",
+    "build": "cross-env NODE_ENV=production babel src -d dist --ignore 'src/**/*.test.js' --copy-files",
+    "clean": "del-cli dist",
+    "lint": "eslint --cache --fix src test",
+    "lint-staged": "lint-staged",
+    "prebuild": "npm run clean",
+    "prepublish": "npm run build",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:update": "jest -u",
+    "test:manual": "webpack-dev-server test/manual/src/index.js --open --config test/manual/webpack.config.js",
+    "defaults": "webpack-defaults"
+  },
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "webpack": "^4.4.0"
+  },
+  "dependencies": {
+    "@webpack-contrib/schema-utils": "^1.0.0-beta.0",
+    "loader-utils": "^1.1.0",
+    "webpack-sources": "^1.1.0"
+  },
+  "devDependencies": {
+    "@webpack-contrib/eslint-config-webpack": "^2.0.4",
+    "babel-cli": "^6.26.0",
+    "babel-jest": "^23.4.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "cross-env": "^5.2.0",
+    "css-loader": "^1.0.0",
+    "del": "^3.0.0",
+    "del-cli": "^1.1.0",
+    "eslint": "^5.2.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-prettier": "^2.6.2",
+    "file-loader": "^1.1.11",
+    "globby": "^8.0.1",
+    "jest": "^23.4.1",
+    "lint-staged": "^7.2.0",
+    "lodash.get": "^4.4.2",
+    "memory-fs": "^0.4.1",
+    "prettier": "^1.13.7",
+    "raw-loader": "^0.5.1",
+    "rimraf": "^2.6.2",
+    "webpack": "^4.16.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-defaults": "^2.3.0",
+    "webpack-dev-server": "^3.1.4"
+  },
+  "keywords": [
+    "webpack",
+    "extract",
+    "plugin"
+  ],
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  }
+}

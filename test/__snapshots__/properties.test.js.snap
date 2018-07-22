@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`extract all properties from .properties files 1`] = `
+"Header.Title = Hello World
+Header.Subtitle = How are you doing?
+
+Footer.Greeting = All rights reserved.
+
+"
+`;
+
+exports[`remove new lines at the end of each file when the option is set 1`] = `
+"Header.Title = Hello World
+Header.Subtitle = How are you doing?
+Footer.Greeting = All rights reserved.
+"
+`;

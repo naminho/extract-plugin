@@ -15,3 +15,22 @@ Header.Subtitle = How are you doing?
 Footer.Greeting = All rights reserved.
 "
 `;
+
+exports[`works alongside mini-css-webpack-plugin 1`] = `
+".header {
+    color: blue;
+}
+.footer {
+    color: red;
+}
+"
+`;
+
+exports[`works alongside mini-css-webpack-plugin 2`] = `
+"Header.Title = Hello World
+Header.Subtitle = How are you doing?
+
+Footer.Greeting = All rights reserved.
+
+"
+`;

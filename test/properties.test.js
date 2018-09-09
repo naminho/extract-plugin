@@ -7,6 +7,7 @@ const globby = require('globby')
 const rimraf = require('rimraf')
 
 const ExtractPlugin = require('./../dist/cjs')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const runWebpackWith = (userConfig, suite) => {
   const randomString = Math.random()
@@ -134,5 +135,45 @@ test('remove new lines at the end of each file when the option is set', async ()
     'properties'
   )
 
+  expect(output['main.properties']).toMatchSnapshot()
+})
+
+test('works alongside mini-css-webpack-plugin', async () => {
+  const output = await runWebpackWith(
+    {
+      entry: './src/index.js',
+      loaders: [
+        {
+          test: /\.css$/,
+          use: [
+            {
+              loader: MiniCssExtractPlugin.loader,
+            },
+            'css-loader',
+          ]
+        },
+        {
+          test: /\.properties$/,
+          use: [
+            {
+              loader: ExtractPlugin.loader,
+            },
+            'raw-loader',
+          ],
+        },
+      ],
+      plugins: [
+        new MiniCssExtractPlugin({
+          filename: '[name].css',
+        }),
+        new ExtractPlugin({
+          filename: '[name].properties',
+        }),
+      ],
+    },
+    'legacy'
+  )
+
+  expect(output['main.css']).toMatchSnapshot()
   expect(output['main.properties']).toMatchSnapshot()
 })

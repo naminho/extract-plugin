@@ -26,7 +26,7 @@ class AnyDependency extends webpack.Dependency {
     super()
     this.identifier = identifier
     this.identifierIndex = identifierIndex
-    this.content = content
+    this.content = typeof content.default !== 'undefined' ? content.default : content
     this.media = media
     this.sourceMap = sourceMap
     this.context = context
@@ -149,9 +149,9 @@ class ExtractPlugin {
             )
           }
           // removeNewLine option added by extract-plugin
-          if (this.options.removeNewLine) {
+          if (this.options.removeNewLine && typeof content[0].content.default !== 'undefined') {
             // eslint-disable-next-line no-param-reassign
-            content[0].content = content[0].content.replace(/\s+$/g, '')
+            content[0].content.default = content[0].content.default.replace(/\s+$/g, '')
           }
           const identifierCountMap = new Map()
           for (const line of content) {
